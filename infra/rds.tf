@@ -15,12 +15,12 @@ resource "aws_db_instance" "db_instance" {
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
   vpc_security_group_ids = ["${aws_security_group.database_security_group.id}"]
   #availability_zone      = var.availability_zones[0]#data.aws_availability_zones.availability_zones.names[0]
-  #db_name                = "db_zabbix"  
+  db_name                = "db_app"  
   skip_final_snapshot = true
   publicly_accessible = false
   deletion_protection = false
   tags = {
-    name = "Workshop DB"
+    name = "Workshop 24"
   }
 }
 
