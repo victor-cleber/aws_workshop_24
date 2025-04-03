@@ -57,3 +57,9 @@ variable "web_server" {
   type        = string
   default     = "web_app"
 }
+
+variable "jh_server" {
+  description = "Jump Host instance name"
+  type        = string
+  default     = "jh_host"
+}
