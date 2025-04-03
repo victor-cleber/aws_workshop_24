@@ -26,8 +26,8 @@ resource "aws_security_group" "alb_security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  tags = {
-    "Name" = "security_group_alb"
+  tags = {    
+    Name = "${var.vpc_name}_sg_alb"
   }
 }
 
@@ -40,8 +40,8 @@ resource "aws_security_group" "app_security_group" {
     description = "From ALB - HTTPS ingress"
     from_port   = 443
     to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = [aws_security_group.alb_security_group.id]
+    protocol    = "tcp"    
+    security_groups = [aws_security_group.alb_security_group.id]
   }
 
   ingress {
@@ -49,7 +49,7 @@ resource "aws_security_group" "app_security_group" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [aws_security_group.alb_security_group.id]
+    security_groups = [aws_security_group.alb_security_group.id]
   }
 
   egress {
@@ -59,8 +59,8 @@ resource "aws_security_group" "app_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    "Name" = "security_group_app"
+  tags = {    
+    Name = "${var.vpc_name}_sg_app"
   }
 
   lifecycle {
@@ -89,8 +89,8 @@ resource "aws_security_group" "database_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    "Name" = "security_group_db"
+  tags = {    
+    Name = "${var.vpc_name}_sg_db"
   }
 
   lifecycle {
