@@ -15,7 +15,7 @@ resource "aws_db_instance" "db_instance" {
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.name
   vpc_security_group_ids = ["${aws_security_group.database_security_group.id}"]
   #availability_zone      = var.availability_zones[0]#data.aws_availability_zones.availability_zones.names[0]
-  db_name                = "db_app"  
+  db_name             = "db_app"
   skip_final_snapshot = true
   publicly_accessible = false
   deletion_protection = false
@@ -25,12 +25,12 @@ resource "aws_db_instance" "db_instance" {
 }
 
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name        = "db_subnet_group"
+  name        = "workshop_24_subnet_group"
   subnet_ids  = [aws_subnet.db_subnet_a.id, aws_subnet.db_subnet_b.id]
-  description = "subnets for database instance"
+  description = "subnet group for database instance"
 
   tags = {
-    Name = "database_subnets"
+    Name = "workshop_24_subnet_group"
   }
 }
 
